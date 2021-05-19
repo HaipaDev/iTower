@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour{
+    public static Player instance;
     [Header("Variables")]
     public float speed=4;
     public float jumpForce=4;
+    public float defaultGravity=2;
     [SerializeField] Transform feetPos;
     [SerializeField] float checkRadius=0.3f;
     [SerializeField] LayerMask whatIsGround;
@@ -19,6 +21,7 @@ public class Player : MonoBehaviour{
 
     Rigidbody2D rb;
     float moveInput;
+    void Awake(){instance=this;}
     void Start(){
         rb=GetComponent<Rigidbody2D>();
     }

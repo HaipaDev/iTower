@@ -48,3 +48,4 @@ MonoBehaviour:
   spawnDistances: {x: 1, y: 2}
   spawnX: {x: -3, y: 3}
   sizes: {x: 1.6, y: 4}
+  fallSpeed: 1.4

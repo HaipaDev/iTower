@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9043900482064302582}
   - component: {fileID: 9043900482064302583}
   - component: {fileID: 9043900482064302576}
+  - component: {fileID: 3012594806856970629}
   m_Layer: 6
   m_Name: Platform
   m_TagString: Platform
@@ -95,7 +96,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 9043900482064302577}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a4c39341b760d2c40ba9be0df17a92cf, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
@@ -152,3 +153,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3012594806856970629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9043900482064302577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab1114735fd915498be934d5a0ac1cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
