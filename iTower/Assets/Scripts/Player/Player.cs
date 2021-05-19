@@ -12,19 +12,18 @@ public class Player : MonoBehaviour{
     [Header("Other")]
     [HideInInspector]public bool damaged;
     [HideInInspector]public bool healed;
-    bool isGrounded;
-    float jumpTimer;
+    [SerializeField]bool isGrounded;
+    [SerializeField]float jumpTimer;
     public float jumpTime;
-    bool isJumping;
+    [SerializeField]bool isJumping;
 
     Rigidbody2D rb;
-    
     float moveInput;
     void Start(){
         rb=GetComponent<Rigidbody2D>();
     }
     void Update(){
-        if(moveInput>0){GetComponent<SpriteRenderer>().flipX=true;}else{GetComponent<SpriteRenderer>().flipX=false;}//Flip the sprite
+        if(moveInput>0){GetComponent<SpriteRenderer>().flipX=true;}else if(moveInput<0){GetComponent<SpriteRenderer>().flipX=false;}//Flip the sprite
         MovePlayerJump();
     }
     void FixedUpdate(){
@@ -36,11 +35,13 @@ public class Player : MonoBehaviour{
     }
     void MovePlayerJump(){
         isGrounded=Physics2D.OverlapCircle(feetPos.position,checkRadius,whatIsGround);//Check if grounded
-        if(isGrounded&&Input.GetKey(KeyCode.Space)){
+        if(Input.GetKey(KeyCode.Space)){isGrounded=false;}//Only isGrounded when not holding space
+        if(isGrounded){jumpTimer=jumpTime;}
+        if(jumpTimer==jumpTime&&Input.GetKeyDown(KeyCode.Space)){
             isJumping=true;
-            jumpTimer=jumpTime;
             rb.velocity=Vector2.up*jumpForce;
         }
+        
         if(isJumping&&Input.GetKey(KeyCode.Space)){
             if(jumpTimer>0){
                 rb.velocity=Vector2.up*jumpForce;
@@ -49,4 +50,16 @@ public class Player : MonoBehaviour{
         }
         if(Input.GetKeyUp(KeyCode.Space)){isJumping=false;}
     }
+
+    void OnTriggerStay(Collider other){
+        if(other.gameObject.tag=="Ground"){
+            GetComponent<Collider>().material.dynamicFriction=0;
+        }
+    }
+ 
+    /*void OnTriggerExit(Collider other){
+        if(other.gameObject.tag=="Ground"){
+            GetComponent<Collider>().material.dynamicFriction=1;
+        }
+    }*/
 }

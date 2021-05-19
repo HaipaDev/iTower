@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5704781866789103110}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,18 +100,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.019402534, y: -0.08111513}
+  m_Offset: {x: 0.017505467, y: -0.07257867}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2307693, y: 1.2307693}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.72654086, y: 1.0071552}
+  m_Size: {x: 0.5330472, y: 0.8307347}
   m_EdgeRadius: 0
 --- !u!50 &7386467585896616976
 Rigidbody2D:
@@ -131,7 +131,7 @@ Rigidbody2D:
   m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!114 &5704781866789103110
@@ -155,6 +155,8 @@ MonoBehaviour:
     m_Bits: 64
   damaged: 0
   healed: 0
+  isGrounded: 0
+  jumpTimer: 0
   jumpTime: 0.35
 --- !u!1 &7422840955605027444
 GameObject:
@@ -180,7 +182,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7422840955605027444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.586, z: 0}
+  m_LocalPosition: {x: 0, y: -0.497, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6099921895523752195}
