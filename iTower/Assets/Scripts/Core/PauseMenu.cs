@@ -29,13 +29,11 @@ public class PauseMenu : MonoBehaviour{
         GameObject.Find("BlurImage").GetComponent<SpriteRenderer>().enabled=false;
         GameSession.instance.gameSpeed=1;
         GameIsPaused=false;
-        Debug.Log("Resuming pause");
     }
     public void PauseEmpty(){
         GameObject.Find("BlurImage").GetComponent<SpriteRenderer>().enabled=true;
         GameIsPaused=true;
         GameSession.instance.gameSpeed=0;
-        Debug.Log("Pausing");
     }
     public void Pause(){
         prevGameSpeed = GameSession.instance.gameSpeed;
