@@ -51,7 +51,8 @@ public class Player : MonoBehaviour{
                 jumpTimer-=Time.deltaTime;
             }else{isJumping=false;}
         }
-        if(Input.GetKeyUp(KeyCode.Space)){isJumping=false;}
+        if(Input.GetKeyUp(KeyCode.Space)){isJumping=false;jumpTimer=0;}
+        if(!isGrounded&&!isJumping){jumpTimer=0;}
     }
 
     void OnTriggerStay(Collider other){

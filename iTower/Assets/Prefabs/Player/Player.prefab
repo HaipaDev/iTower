@@ -148,8 +148,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   jumpForce: 6.6
+  defaultGravity: 2
   feetPos: {fileID: 8634532959811884570}
-  checkRadius: 0.3
+  checkRadius: 0.15
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -158,6 +159,7 @@ MonoBehaviour:
   isGrounded: 0
   jumpTimer: 0
   jumpTime: 0.35
+  isJumping: 0
 --- !u!1 &7422840955605027444
 GameObject:
   m_ObjectHideFlags: 0
