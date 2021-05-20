@@ -11,6 +11,7 @@ public class PlatformSpawner : MonoBehaviour{
     public Vector2 sizes=new Vector2(1f,3f);//X is min, Y is max
     public float fallSpeed=1.4f;
     GameObject highestPlatform;
+    int platformCount;
     bool fallingPlatforms;
     public float speedTime=0.5f;
     [SerializeField]float speedTimer=-4;
@@ -48,7 +49,9 @@ public class PlatformSpawner : MonoBehaviour{
     }
     void SpawnPlatform(float yy){
         GameObject go=Instantiate(platformPrefab,new Vector2(Random.Range(spawnX.x,spawnX.y),yy),Quaternion.identity);//Spawn platform
-        go.transform.localScale=new Vector2(Random.Range(sizes.x,sizes.y),go.transform.localScale.y);//Set size
+        go.transform.GetChild(0).localScale=new Vector2(Random.Range(sizes.x,sizes.y),go.transform.GetChild(0).localScale.y);//Set size
         highestPlatform=go;//On each spawn set the highest platform
+        platformCount++;
+        go.GetComponent<Platform>().ID=platformCount;
     }
 }
