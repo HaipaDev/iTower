@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class PlatformSpawner : MonoBehaviour{
     [SerializeField]GameObject platformPrefab;
@@ -49,9 +50,15 @@ public class PlatformSpawner : MonoBehaviour{
     }
     void SpawnPlatform(float yy){
         GameObject go=Instantiate(platformPrefab,new Vector2(Random.Range(spawnX.x,spawnX.y),yy),Quaternion.identity);//Spawn platform
-        go.transform.GetChild(0).localScale=new Vector2(Random.Range(sizes.x,sizes.y),go.transform.GetChild(0).localScale.y);//Set size
+        SetPlatformScale(go,Random.Range(sizes.x,sizes.y));//Set size
         highestPlatform=go;//On each spawn set the highest platform
         platformCount++;
         go.GetComponent<Platform>().ID=platformCount;
+    }
+
+    void SetPlatformScale(GameObject go,float size){
+        go.GetComponent<SpriteShapeController>().spline.SetPosition(0,new Vector3(-size,0,0));
+        go.GetComponent<SpriteShapeController>().spline.SetPosition(1,new Vector3(size,0,0));
+        go.transform.GetChild(0).localScale=new Vector2(size,go.transform.GetChild(0).localScale.y);
     }
 }
