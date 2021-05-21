@@ -45,7 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformPrefab: {fileID: 9043900482064302577, guid: 0ea2ab98d94e90c4fb71382bfae1291d, type: 3}
   startPlatformsCount: 8
+  maxPlatformCount: 13
   spawnDistances: {x: 1, y: 2}
   spawnX: {x: -3, y: 3}
-  sizes: {x: 1.6, y: 4}
+  sizes: {x: 0.9, y: 2.8}
   fallSpeed: 1.4
+  speedTime: 0.5
+  speedTimer: -4
+  highestPlayerPos: 0

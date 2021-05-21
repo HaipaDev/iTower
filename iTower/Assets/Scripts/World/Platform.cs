@@ -22,6 +22,5 @@ public class Platform : MonoBehaviour{
     void SetPlatformScale(float size){
         GetComponent<SpriteShapeController>().spline.SetPosition(0,new Vector3(-size,0,0));
         GetComponent<SpriteShapeController>().spline.SetPosition(1,new Vector3(size,0,0));
-        transform.GetChild(0).localScale=new Vector2(size,transform.GetChild(0).localScale.y);
     }
 }

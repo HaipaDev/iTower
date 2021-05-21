@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dir: 1
-  strength: 0.05
+  strength: 0.04
+  currentSpeed: 0
 --- !u!1 &8093273740133589764
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,6 +47,7 @@ public class PlatformSpawner : MonoBehaviour{
     }
     void SetPlatformSpeed(float speed){
         foreach(Platform p in FindObjectsOfType<Platform>()){p.GetComponent<Rigidbody2D>().velocity=new Vector2(0,-speed);}
+        FindObjectOfType<BGScroller2>().currentSpeed=speed*FindObjectOfType<BGScroller2>().strength;
     }
     void SpawnPlatform(float yy){
         GameObject go=Instantiate(platformPrefab,new Vector2(Random.Range(spawnX.x,spawnX.y),yy),Quaternion.identity);//Spawn platform
@@ -59,6 +60,5 @@ public class PlatformSpawner : MonoBehaviour{
     void SetPlatformScale(GameObject go,float size){
         go.GetComponent<SpriteShapeController>().spline.SetPosition(0,new Vector3(-size,0,0));
         go.GetComponent<SpriteShapeController>().spline.SetPosition(1,new Vector3(size,0,0));
-        go.transform.GetChild(0).localScale=new Vector2(size,go.transform.GetChild(0).localScale.y);
     }
 }
