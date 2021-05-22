@@ -135,3 +135,4 @@ public class GameSession : MonoBehaviour{
     }
     public void SetCheatmode(){if(!cheatmode){cheatmode=true;return;}else{cheatmode=false;return;}}
 }
+public enum dir{up,down,left,right}
