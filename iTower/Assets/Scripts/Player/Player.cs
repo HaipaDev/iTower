@@ -18,6 +18,7 @@ public class Player : MonoBehaviour{
     [SerializeField]float jumpTimer;
     public float jumpTime;
     [SerializeField]bool isJumping;
+    public Animator animator;
 
     Rigidbody2D rb;
     float moveInput;
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour{
     }
     void MovePlayerHorizontal(){
         moveInput=Input.GetAxisRaw("Horizontal");
+        animator.SetFloat("Speed", Mathf.Abs(moveInput));
         rb.velocity=new Vector2(moveInput*speed,rb.velocity.y);
     }
     void MovePlayerJump(){
