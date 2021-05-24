@@ -11,7 +11,7 @@ public class PlatformSpawner : MonoBehaviour{
     public Vector2 spawnX=new Vector2(-3f,3f);//X is left max, Y is right max
     public Vector2 sizes=new Vector2(1f,3f);//X is min, Y is max
     public float fallSpeed=1.4f;
-    GameObject highestPlatform;
+    [HideInInspector]public GameObject highestPlatform;
     int platformCount;
     bool fallingPlatforms;
     public float speedTime=0.5f;
@@ -29,21 +29,24 @@ public class PlatformSpawner : MonoBehaviour{
         float pyPos=Player.instance.transform.position.y;
         if(pyPos>0&&fallingPlatforms!=true){fallingPlatforms=true;}//If player is higher than middle trigger falling platforms
         if(fallingPlatforms){
-            SetPlatformSpeed(fallSpeed);
             if(FindObjectsOfType<Platform>().Length<maxPlatformCount){SpawnPlatform(highestPlatform.transform.position.y+Random.Range(spawnDistances.x,spawnDistances.y));}//Spawn new platforms
         }
-        /*if(pyPos>2f){//Speed up when Player is high
+        if(pyPos>2f){//Speed up when Player is high
             speedTimer=speedTime*(1+(pyPos/10));
         }
         if(speedTimer>0){
             speedTimer-=Time.deltaTime;
-            if(pyPos>highestPlayerPos){
+            if(pyPos>2){
                 SetPlatformSpeed(fallSpeed*highestPlayerPos);
-                Player.instance.GetComponent<Rigidbody2D>().gravityScale=highestPlayerPos;
+                //Player.instance.GetComponent<Rigidbody2D>().gravityScale=highestPlayerPos;
                 highestPlayerPos=pyPos;
             }
-        }*/
-        //if(speedTimer<=0){Player.instance.GetComponent<Rigidbody2D>().gravityScale=Player.instance.defaultGravity;highestPlayerPos=0;if(fallingPlatforms){SetPlatformSpeed(fallSpeed);}}//Bring back normal speed
+        }
+        if(speedTimer<=0){//Bring back normal speed
+            if(fallingPlatforms){SetPlatformSpeed(fallSpeed);}
+            //Player.instance.GetComponent<Rigidbody2D>().gravityScale=Player.instance.defaultGravity;
+            highestPlayerPos=0;
+        }
     }
     void SetPlatformSpeed(float speed){
         foreach(Platform p in FindObjectsOfType<Platform>()){p.GetComponent<Rigidbody2D>().velocity=new Vector2(0,-speed);}
@@ -55,6 +58,7 @@ public class PlatformSpawner : MonoBehaviour{
         highestPlatform=go;//On each spawn set the highest platform
         platformCount++;
         go.GetComponent<Platform>().ID=platformCount;
+        //if(fallingPlatforms&&speedTimer<=0)SetPlatformSpeed(fallSpeed);
     }
 
     void SetPlatformScale(GameObject go,float size){
