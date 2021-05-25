@@ -10,7 +10,7 @@ public class Player : MonoBehaviour{
     public float defaultGravity=2;
     public float groundFriction=0.075f;
     [SerializeField] Transform feetPos;
-    [SerializeField] float checkRadius=0.15f;
+    [SerializeField] float checkRadius=0.3f;
     [SerializeField] LayerMask whatIsGround;
     [Header("Variables")]
     [HideInInspector]public bool damaged;
@@ -20,11 +20,14 @@ public class Player : MonoBehaviour{
     public float jumpTime;
     [SerializeField]bool isJumping;
     public int wallBounces;
+    public float wallBounceTimer;
+    public float wallBounceTimerStop;
+
+
     Animator anim;
     Rigidbody2D rb;
     float moveInput;
     int faceDir=-1;
-    float wallBounceTimer;
 
     void Awake(){instance=this;}
     void Start(){
@@ -40,8 +43,9 @@ public class Player : MonoBehaviour{
                 rb.velocity=new Vector2(rb.velocity.x-(groundFriction*t),rb.velocity.y);
             }else{if(wallBounces==0){rb.velocity=new Vector2(0,rb.velocity.y);}}
         }
-        wallBounceTimer-=Time.deltaTime;
-        if(wallBounceTimer<=0)wallBounces=0;
+        if(wallBounceTimer>0)wallBounceTimer-=Time.deltaTime;
+        if(wallBounceTimerStop>0)wallBounceTimerStop-=Time.deltaTime;
+        if(wallBounceTimerStop<=0)wallBounces=0;
     }
     void FixedUpdate(){
         MovePlayerHorizontal();
@@ -49,7 +53,7 @@ public class Player : MonoBehaviour{
     void MovePlayerHorizontal(){
         moveInput=Input.GetAxisRaw("Horizontal");
         anim.SetFloat("Speed", Mathf.Abs(moveInput));
-        if(moveInput!=0&&wallBounces==0)rb.velocity=new Vector2(moveInput*speed,rb.velocity.y);
+        if(moveInput!=0&&wallBounceTimer<=0)rb.velocity=new Vector2(moveInput*speed,rb.velocity.y);
     }
     void MovePlayerJump(){
         isGrounded=Physics2D.OverlapCircle(feetPos.position,checkRadius,whatIsGround);//Check if grounded
@@ -73,42 +77,19 @@ public class Player : MonoBehaviour{
     void BounceWall(){
         Debug.Log("Bounced");
         wallBounces++;
+        wallBounceTimer=0.12f*(1+(speed/10));//~0.2 on speed=6
+        wallBounceTimerStop=0.12f*speed;//~0.7 on speed=6
         rb.velocity=new Vector2((speed*faceDir)*-1,rb.velocity.y);
     }
 
-    
-    /*void OnTriggerEnter2D(Collider2D other){
-        if(other.gameObject.tag.Contains("Wall")){
-            if(wallBounces<3)BounceWall();
-        }
-    }
-    void OnTriggerStay2D(Collider2D other){
-        if(other.gameObject.tag.Contains("Wall")){
-            //if(wallBounces<3)BounceWall();
-        }
-    }
-    void OnTriggerExit2D(Collider2D other){
-        if(other.gameObject.tag.Contains("Wall")){
-            wallBounces=0;
-        }
-    }*/
-
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.tag.Contains("Wall")){
-            if(wallBounces<3)BounceWall();
-        }
-    }
-    void OnCollisionStay2D(Collision2D other){
-        if(other.gameObject.tag.Contains("Platform")){
-            
-        }
-        if(other.gameObject.tag.Contains("Wall")){
-            if(wallBounces<3)BounceWall();
+            if(wallBounces<2)BounceWall();
         }
     }
     void OnCollisionExit2D(Collision2D other){
         if(other.gameObject.tag.Contains("Wall")){
-            wallBounceTimer=0.1f;
+            //wallBounceTimer=0.2f;
             //wallBounces=0;
         }
     }

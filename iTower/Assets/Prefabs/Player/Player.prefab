@@ -153,7 +153,7 @@ MonoBehaviour:
   defaultGravity: 2
   groundFriction: 0.085
   feetPos: {fileID: 8634532959811884570}
-  checkRadius: 0.15
+  checkRadius: 0.3
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -164,6 +164,8 @@ MonoBehaviour:
   jumpTime: 0.35
   isJumping: 0
   wallBounces: 0
+  wallBounceTimer: 0
+  wallBounceTimerStop: 0
 --- !u!95 &161790889918629518
 Animator:
   serializedVersion: 3
