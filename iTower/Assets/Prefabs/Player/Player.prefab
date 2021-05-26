@@ -148,8 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d1a7113debf5db4ea196611c31b20d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
-  jumpForce: 6.6
+  speedDef: 3
+  jumpFcDef: 5.75
+  jumpTimeDef: 0.15
   defaultGravity: 2
   groundFriction: 0.085
   feetPos: {fileID: 8634532959811884570}
@@ -157,15 +158,19 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  damaged: 0
-  healed: 0
+  accumulatedSpeed: 1
+  accumulatedSpeedTimer: 0
+  speedC: 0
+  jumpFcC: 0
+  jumpTimeC: 0
   isGrounded: 0
   jumpTimer: 0
-  jumpTime: 0.35
   isJumping: 0
   wallBounces: 0
   wallBounceTimer: 0
   wallBounceTimerStop: 0
+  damaged: 0
+  healed: 0
 --- !u!95 &161790889918629518
 Animator:
   serializedVersion: 3

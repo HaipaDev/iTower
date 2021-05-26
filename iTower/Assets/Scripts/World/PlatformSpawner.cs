@@ -16,7 +16,6 @@ public class PlatformSpawner : MonoBehaviour{
     bool fallingPlatforms;
     public float speedTime=0.5f;
     [SerializeField]float speedTimer=-4;
-    [SerializeField]float highestPlayerPos=0;
     void Start(){
         //Spawn first static plaforms
         float yy=-4.6f;//First platform Y
@@ -31,21 +30,18 @@ public class PlatformSpawner : MonoBehaviour{
         if(fallingPlatforms){
             if(FindObjectsOfType<Platform>().Length<maxPlatformCount){SpawnPlatform(highestPlatform.transform.position.y+Random.Range(spawnDistances.x,spawnDistances.y));}//Spawn new platforms
         }
-        if(pyPos>2f){//Speed up when Player is high
-            speedTimer=speedTime*(1+(pyPos/10));
+        var pSpeed=Player.instance.accumulatedSpeed;
+        if(pSpeed>1.15f){//Speed up when Player accumulated speed is higher
+            speedTimer=speedTime*(1+(pSpeed/10));
         }
         if(speedTimer>0){
             speedTimer-=Time.deltaTime;
-            if(pyPos>2){
-                SetPlatformSpeed(fallSpeed*highestPlayerPos);
-                //Player.instance.GetComponent<Rigidbody2D>().gravityScale=highestPlayerPos;
-                highestPlayerPos=pyPos;
+            if(fallingPlatforms){
+                SetPlatformSpeed(fallSpeed*1.25f*pSpeed);
             }
         }
         if(speedTimer<=0){//Bring back normal speed
             if(fallingPlatforms){SetPlatformSpeed(fallSpeed);}
-            //Player.instance.GetComponent<Rigidbody2D>().gravityScale=Player.instance.defaultGravity;
-            highestPlayerPos=0;
         }
     }
     void SetPlatformSpeed(float speed){
