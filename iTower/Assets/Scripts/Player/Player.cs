@@ -19,7 +19,7 @@ public class Player : MonoBehaviour{
     public float accumulatedSpeedTimer;
     public float speedC;
     public float jumpFcC;
-    public float jumpTimeC;
+    //public float jumpTimeC;
     [SerializeField]bool isGrounded;
     [SerializeField]float jumpTimer;
     [SerializeField]bool isJumping;
@@ -56,12 +56,12 @@ public class Player : MonoBehaviour{
             if(accumulatedSpeed>speedMax){accumulatedSpeed=speedMax;}
             speedC=speedDef*accumulatedSpeed*1.5f;//;if(accumulatedSpeed==speedMax){speedC=speedDef*2;}
             jumpFcC=jumpFcDef*accumulatedSpeed;if(accumulatedSpeed>=1.3f){jumpFcC=jumpFcDef*1.1f;}
-            jumpTimeC=jumpTimeDef*accumulatedSpeed*0.9f;
+            //jumpTimeC=jumpTimeDef*accumulatedSpeed*0.9f;
         }else{
             if(accumulatedSpeed<1){accumulatedSpeed=1;}
             speedC=speedDef;
             jumpFcC=jumpFcDef;
-            jumpTimeC=jumpTimeDef;
+            //jumpTimeC=jumpTimeDef;
         }
     }
     void MovePlayerHorizontal(){
@@ -83,8 +83,8 @@ public class Player : MonoBehaviour{
     void MovePlayerJump(){
         isGrounded=Physics2D.OverlapCircle(feetPos.position,checkRadius,whatIsGround);//Check if grounded
         if(Input.GetKey(KeyCode.Space)){isGrounded=false;}//Only isGrounded when not holding space
-        if(isGrounded){jumpTimer=jumpTimeC;}
-        if((jumpTimer<=jumpTimeC+0.1f||jumpTimer>=jumpTimeC-0.1f)&&Input.GetKeyDown(KeyCode.Space)){
+        if(isGrounded){jumpTimer=jumpTimeDef;}
+        if(jumpTimer==jumpTimeDef&&Input.GetKeyDown(KeyCode.Space)){
             isJumping=true;
             AddSpeed(0.03f,1.5f);
             rb.velocity=Vector2.up*jumpFcC;
