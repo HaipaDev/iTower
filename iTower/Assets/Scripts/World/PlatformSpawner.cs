@@ -34,12 +34,12 @@ public class PlatformSpawner : MonoBehaviour{
         if(pSpeed>1.15f){//Speed up when Player accumulated speed is higher
             speedTimer=speedTime*(1+(pSpeed/10));
         }
-        if(speedTimer>0){
+        if(pyPos<3&&speedTimer>0){
             speedTimer-=Time.deltaTime;
-            if(fallingPlatforms){
-                SetPlatformSpeed(fallSpeed*1.25f*pSpeed);
-            }
+            if(fallingPlatforms){SetPlatformSpeed(fallSpeed*1.25f*Mathf.Abs(pSpeed));}
         }
+        if(pyPos>3&&pyPos<8&&fallingPlatforms){SetPlatformSpeed(fallSpeed*1.25f*Mathf.Abs(8-pyPos));}
+        if(pyPos>8&&fallingPlatforms){SetPlatformSpeed(fallSpeed*1.25f*Mathf.Abs(12+8-pyPos));}
         if(speedTimer<=0){//Bring back normal speed
             if(fallingPlatforms){SetPlatformSpeed(fallSpeed);}
         }
