@@ -16,6 +16,7 @@ public class PlatformSpawner : MonoBehaviour{
     bool fallingPlatforms;
     public float speedTime=0.5f;
     [SerializeField]float speedTimer=-4;
+    [SerializeField]float fallSpeedC;
     void Start(){
         //Spawn first static plaforms
         float yy=-4.6f;//First platform Y
@@ -29,20 +30,20 @@ public class PlatformSpawner : MonoBehaviour{
         if(pyPos>0&&fallingPlatforms!=true){fallingPlatforms=true;}//If player is higher than middle trigger falling platforms
         if(fallingPlatforms){
             if(FindObjectsOfType<Platform>().Length<maxPlatformCount){SpawnPlatform(highestPlatform.transform.position.y+Random.Range(spawnDistances.x,spawnDistances.y));}//Spawn new platforms
+            SetPlatformSpeed(fallSpeedC);//Set speed
         }
         var pSpeed=Player.instance.accumulatedSpeed;
         if(pSpeed>1.15f){//Speed up when Player accumulated speed is higher
             speedTimer=speedTime*(1+(pSpeed/10));
         }
-        if(pyPos<3&&speedTimer>0){
+        if(speedTimer>0){
             speedTimer-=Time.deltaTime;
-            if(fallingPlatforms){SetPlatformSpeed(fallSpeed*1.25f*Mathf.Abs(pSpeed));}
+            fallSpeedC=fallSpeed*(1.5f*Mathf.Abs(pSpeed));
         }
-        if(pyPos>3&&pyPos<8&&fallingPlatforms){SetPlatformSpeed(fallSpeed*1.25f*Mathf.Abs(8-pyPos));}
-        if(pyPos>8&&fallingPlatforms){SetPlatformSpeed(fallSpeed*1.25f*Mathf.Abs(12+8-pyPos));}
         if(speedTimer<=0){//Bring back normal speed
-            if(fallingPlatforms){SetPlatformSpeed(fallSpeed);}
+            fallSpeedC=fallSpeed;
         }
+        if(pyPos>3){fallSpeedC=fallSpeed*(Mathf.Clamp(pyPos/2,1.66f,6)*(1+(pyPos/10)))*Mathf.Abs(pSpeed);}
     }
     void SetPlatformSpeed(float speed){
         foreach(Platform p in FindObjectsOfType<Platform>()){p.GetComponent<Rigidbody2D>().velocity=new Vector2(0,-speed);}

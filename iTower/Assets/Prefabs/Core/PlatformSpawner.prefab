@@ -48,8 +48,9 @@ MonoBehaviour:
   maxPlatformCount: 13
   spawnDistances: {x: 1, y: 2}
   spawnX: {x: -3, y: 3}
-  sizes: {x: 0.9, y: 2.8}
+  sizes: {x: 0.4, y: 1.5}
   fallSpeed: 1.4
+  highestPlatform: {fileID: 0}
   speedTime: 0.5
   speedTimer: -4
-  highestPlayerPos: 0
+  fallSpeedC: 0
