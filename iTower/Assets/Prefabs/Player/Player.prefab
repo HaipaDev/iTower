@@ -106,7 +106,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.2307693, y: 1.2307693}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   defaultGravity: 2
   groundFriction: 0.085
   feetPos: {fileID: 8634532959811884570}
-  checkRadius: 0.3
+  checkRadius: 0.45
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -162,7 +162,6 @@ MonoBehaviour:
   accumulatedSpeedTimer: 0
   speedC: 0
   jumpFcC: 0
-  jumpTimeC: 0
   isGrounded: 0
   jumpTimer: 0
   isJumping: 0

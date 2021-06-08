@@ -104,7 +104,7 @@ public class Player : MonoBehaviour{
         wallBounces++;
         wallBounceTimer=0.2f;
         wallBounceTimerStop=0.7f;
-        if(isJumping){rb.velocity=new Vector2((speedC*faceDir)*-1,rb.velocity.y);AddSpeed(0.25f,3f);}
+        if(isGrounded){rb.velocity=new Vector2((speedC*faceDir)*-1,rb.velocity.y);AddSpeed(0.25f,3f);}
         else{rb.velocity=new Vector2((speedC*faceDir)*-1,jumpFcC);AddSpeed(0.125f,3f);}//Bounce upwards when not grounded
     }
     void AddSpeed(float amnt,float timerAdd=1){
@@ -114,7 +114,8 @@ public class Player : MonoBehaviour{
 
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.tag.Contains("Wall")){
-            if(wallBounces<2)BounceWall();
+            if(!isJumping&&wallBounces<2)BounceWall();
+            else if(isJumping&&!isGrounded&&wallBounces<1)BounceWall();
         }
     }
 }
