@@ -11,6 +11,7 @@ public class BGScroller2 : MonoBehaviour{
     float[] startpos=new float[2];
     int dirM;
     void Start(){
+        if(Player.instance==null)currentSpeed=strength;
         if(dir==dir.up||dir==dir.right){dirM=1;}else{dirM=-1;}//Set directions for calculations
         startpos[0]=transform.GetChild(0).position.y;
         length=transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size.y;

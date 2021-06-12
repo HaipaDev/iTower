@@ -45,9 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smthOn: 1
   score: 0
-  gameSpeed: 1
+  gameSpeed: 0.4
   defaultGameSpeed: 1
-  speedChanged: 0
+  speedChanged: 1
   cheatmode: 0
   dmgPopups: 1
   analyticsOn: 1
