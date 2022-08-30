@@ -12,7 +12,7 @@ public class ValueDisplay : MonoBehaviour{
     void Update(){ChangeText();}
     void ChangeText(){
         if(GameSession.instance!=null){
-            if(value=="gameVersion")txt.text=GameSession.instance.GetGameVersion();
+            if(value=="gameVersion")txt.text=GameSession.instance.gameVersion;
         }
     }
 }

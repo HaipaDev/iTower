@@ -186,6 +186,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -195,8 +196,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -1408,6 +1409,61 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Dungeon_49: -7514007152789262621
+      Dungeon_39: 7902581591051518725
+      Dungeon_11: -7107195022900573981
+      Dungeon_46: -1747544985102681446
+      Dungeon_44: -2164789337223182612
+      Dungeon_4: -7385175419658825098
+      Dungeon_47: 7586468571552972138
+      Dungeon_16: -2456403029347504819
+      Dungeon_50: -9136049625318058205
+      Dungeon_40: -2027180980304279994
+      Dungeon_12: 8237061683751424216
+      Dungeon_8: 6643711269398968355
+      Dungeon_10: 8241026149576720579
+      Dungeon_21: -5692618148363123961
+      Dungeon_33: 7752677908800734808
+      Dungeon_34: 7600306571821145345
+      Dungeon_20: 6088269635357880315
+      Dungeon_7: 6098089514873771090
+      Dungeon_6: 6104463937874508726
+      Dungeon_0: 5718469909854450143
+      Dungeon_19: 6770974209378706146
+      Dungeon_1: -7048581465117660784
+      Dungeon_30: 2328961427196231413
+      Dungeon_3: 6984513114953419391
+      Dungeon_45: 2491934583593399942
+      Dungeon_17: 1032927243894644294
+      Dungeon_14: 8960765015654168026
+      Dungeon_27: 7419011909564878716
+      Dungeon_48: 2654041437171306703
+      Dungeon_31: -38836230159333514
+      Dungeon_2: 2741894310953368383
+      Dungeon_13: -4233890063712905844
+      Dungeon_53: -4110059370805265076
+      Dungeon_36: -3335613823627329918
+      Dungeon_29: -3411548807712558045
+      Dungeon_23: 1373970748780253702
+      Dungeon_28: 6119508627223213796
+      Dungeon_51: 2495816777284716111
+      Dungeon_9: 4654243933662768636
+      Dungeon_25: 2711691180648414528
+      Dungeon_37: 2716853023472055476
+      Dungeon_15: -2049639243831268160
+      Dungeon_52: 3975987996803956281
+      Dungeon_41: 7920404743664205531
+      Dungeon_43: 3084604627931351016
+      Dungeon_38: -9078247778258130857
+      Dungeon_42: -8753320101615389148
+      Dungeon_35: -3469498660860347695
+      Dungeon_22: -6975476911924486349
+      Dungeon_32: 1189804643199775622
+      Dungeon_24: -921874206113959638
+      Dungeon_5: 9119227501592392301
+      Dungeon_26: -1270674123078836628
+      Dungeon_18: 8814648156130059003
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
