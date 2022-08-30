@@ -9,6 +9,7 @@
 **/[Bb]uilds/
 **/[Ll]ogs/
 **/[Mm]emoryCaptures/
+**/[Pp]lugins-gitignore/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/**/[Aa]ssets/**/*.meta
@@ -58,3 +59,16 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+#Ignore all Demos
+**/[Dd]emo/
+## Odin Inspector
+# Ignore the auto-generated AOT compatibility dll.
+/Assets/Plugins/Sirenix/Assemblies/AOT/*
+
+# Ignore all unpacked demos.
+/Assets/Plugins/Sirenix/Demos/*
+
+# But keep the demo packages themselves.
+!/Assets/Plugins/Sirenix/Demos/*.unitypackage
+
+**/gitignoreScript.cs

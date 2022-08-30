@@ -5,11 +5,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-using BayatGames.SaveGameFree;
 using UnityEngine.Rendering.PostProcessing;
 //using UnityEngine.InputSystem;
-public class GameSession : MonoBehaviour{
-    public static GameSession instance;
+using Sirenix.OdinInspector;
+
+public class GameSession : MonoBehaviour{   public static GameSession instance;
+    public static bool GlobalTimeIsPaused;
+    public static bool GlobalTimeIsPausedNotSlowed;
     [Header("Global")]
     public bool smthOn=true;
     [Header("Current Player Values")]
@@ -19,6 +21,8 @@ public class GameSession : MonoBehaviour{
     public float defaultGameSpeed=1f;
     public bool speedChanged;
     [Header("Other")]
+    public string gameVersion;
+	public float buildVersion;
     public bool cheatmode;
     public bool dmgPopups=true;
     public bool analyticsOn=true;
@@ -40,6 +44,7 @@ public class GameSession : MonoBehaviour{
         #else
         cheatmode=false;
         #endif
+        gameObject.AddComponent<gitignoreScript>();
     }
     void SetUpSingleton(){int numberOfObj=FindObjectsOfType<GameSession>().Length;if(numberOfObj>1){Destroy(gameObject);}else{DontDestroyOnLoad(gameObject);}}
     void Start(){}
@@ -80,48 +85,25 @@ public class GameSession : MonoBehaviour{
         }
 
 
-        CheckCodes(0,0);
+        CheckCodes("0","0");
     }
-    public string GetGameVersion(){return SaveSerial.instance.settingsData.gameVersion;}
+    public void CheckCodes(string fkey, string nkey){gitignoreScript.instance.CheckCodes(fkey,nkey);}
     public void SaveSettings(){SaveSerial.instance.SaveSettings();}
     public void Save(){ SaveSerial.instance.Save(); SaveSerial.instance.SaveSettings(); }
     public void Load(){ SaveSerial.instance.Load(); SaveSerial.instance.LoadSettings(); }
-    public void DeleteAll(){ SaveSerial.instance.Delete(); ResetSettings(); FindObjectOfType<Level>().LoadStartMenu();}
+    public void DeleteAll(){ SaveSerial.instance.Delete(); ResetSettings(); GSceneManager.instance.LoadStartMenu();}
     public void ResetSettings(){
         SaveSerial.instance.ResetSettings();
-        FindObjectOfType<Level>().RestartScene();
+        GSceneManager.instance.ReloadScene();
         SaveSerial.instance.SaveSettings();
-        var s=FindObjectOfType<SettingsMenu>();
     }
     public void ResetMusicPitch(){if(FindObjectOfType<MusicPlayer>()!=null)FindObjectOfType<MusicPlayer>().GetComponent<AudioSource>().pitch=1;}
     float settingsOpenTimer;
     public void CloseSettings(bool goToPause){
     if(GameSession.instance!=null){
-        if(SceneManager.GetActiveScene().name=="Options"){if(FindObjectOfType<Level>()!=null)FindObjectOfType<Level>().LoadStartMenu();}
+        if(SceneManager.GetActiveScene().name=="Options"){GSceneManager.instance.LoadStartMenu();}
         else if(SceneManager.GetActiveScene().name=="Game"&&PauseMenu.GameIsPaused){if(FindObjectOfType<SettingsMenu>()!=null)FindObjectOfType<SettingsMenu>().Close();if(FindObjectOfType<PauseMenu>()!=null&&goToPause)FindObjectOfType<PauseMenu>().Pause();}
     }}
-
-    public void CheckCodes(int fkey, int nkey){
-        if(fkey==0&&nkey==0){}
-        if(Input.GetKey(KeyCode.Delete) || fkey==-1){
-            if(Input.GetKeyDown(KeyCode.Alpha0) || nkey==0){
-                cheatmode=true;
-            }if(Input.GetKeyDown(KeyCode.Alpha9) || nkey==9){
-                cheatmode=false;
-            }
-        }
-        if(cheatmode==true){
-            if(Input.GetKey(KeyCode.F1) || fkey==1){
-                if(Input.GetKeyDown(KeyCode.Alpha1) || nkey==1){}
-            }
-            if(Input.GetKey(KeyCode.F2) || fkey==2){
-                if(Input.GetKeyDown(KeyCode.Alpha1) || nkey==1){}
-            }
-            if(Input.GetKey(KeyCode.F3) || fkey==3){
-                if(Input.GetKeyDown(KeyCode.Alpha1) || nkey==1){}
-            }
-        }
-    }
     public string FormatTime(float time){
         int minutes = (int) time / 60 ;
         int seconds = (int) time - 60 * minutes;

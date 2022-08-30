@@ -17,7 +17,7 @@ public class Platform : MonoBehaviour{
         }
     }
     void Update(){
-        if(transform.position.y<-8){Destroy(gameObject);}
+        if(transform.position.y+0.2f<-7){Destroy(gameObject);}
     }
     void SetPlatformScale(float size){
         GetComponent<SpriteShapeController>().spline.SetPosition(0,new Vector3(-size,0,0));
