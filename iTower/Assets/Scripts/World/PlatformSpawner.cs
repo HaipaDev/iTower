@@ -9,6 +9,8 @@ public class PlatformSpawner : MonoBehaviour{
     [SerializeField]int maxPlatformCount=13;
     public Vector2 spawnDistances=new Vector2(1f,2f);//X is min, Y is max
     public Vector2 spawnX=new Vector2(-3f,3f);//X is left max, Y is right max
+    public bool spawnBasedOnLastPos=true;
+    public Vector2 spawnXnext=new Vector2(-1.5f,1.5f);//X is left max, Y is right max
     public Vector2 sizes=new Vector2(1f,3f);//X is min, Y is max
     public float fallSpeed=1.4f;
     [HideInInspector]public GameObject highestPlatform;
@@ -17,6 +19,7 @@ public class PlatformSpawner : MonoBehaviour{
     public float speedTime=0.5f;
     [SerializeField]float speedTimer=-4;
     [SerializeField]float fallSpeedC;
+    Vector2 lastPlatformPos;
     void Start(){
         //Spawn first static plaforms
         float yy=-4.6f;//First platform Y
@@ -50,7 +53,14 @@ public class PlatformSpawner : MonoBehaviour{
         FindObjectOfType<BGScroller2>().currentSpeed=speed*FindObjectOfType<BGScroller2>().strength;
     }
     void SpawnPlatform(float yy){
-        GameObject go=Instantiate(platformPrefab,new Vector2(Random.Range(spawnX.x,spawnX.y),yy),Quaternion.identity);//Spawn platform
+        var posX=0f;
+        while(posX>3.5f||posX<-3.5f){
+            if(lastPlatformPos==Vector2.zero||!spawnBasedOnLastPos){posX=Random.Range(spawnX.x,spawnX.y);}
+            else{if(spawnBasedOnLastPos)posX=lastPlatformPos.x+Random.Range(spawnXnext.x,spawnXnext.y);}
+        }
+        var pos=new Vector2(posX,yy);
+        lastPlatformPos=pos;
+        GameObject go=Instantiate(platformPrefab,pos,Quaternion.identity);//Spawn platform
         SetPlatformScale(go,Random.Range(sizes.x,sizes.y));//Set size
         highestPlatform=go;//On each spawn set the highest platform
         platformCount++;

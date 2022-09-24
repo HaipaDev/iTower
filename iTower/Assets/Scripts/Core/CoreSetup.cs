@@ -6,7 +6,7 @@ using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 
-public class GameCreator : MonoBehaviour{   public static GameCreator instance;
+public class CoreSetup : MonoBehaviour{   public static CoreSetup instance;
     [Header("Main managers")]
     [AssetsOnly][SerializeField] GameObject saveSerialPrefab;
     [AssetsOnly][SerializeField] GameObject easySavePrefab;
@@ -14,7 +14,7 @@ public class GameCreator : MonoBehaviour{   public static GameCreator instance;
     [AssetsOnly][SerializeField] GameObject gameSessionPrefab;
     
     [Header("Assets managers")]
-    [AssetsOnly][SerializeField] GameObject gameAssetsPrefab;
+    [AssetsOnly][SerializeField] GameObject assetsManagerPrefab;
     [AssetsOnly][SerializeField] GameObject audioManagerPrefab;
     [AssetsOnly][SerializeField] GameObject jukeboxPrefab;
     
@@ -38,7 +38,7 @@ public class GameCreator : MonoBehaviour{   public static GameCreator instance;
         LoadPre();
         if(FindObjectOfType<GameSession>()==null){Instantiate(gameSessionPrefab);}
 
-        if(FindObjectOfType<GameAssets>()==null){Instantiate(gameAssetsPrefab);}
+        if(FindObjectOfType<AssetsManager>()==null){Instantiate(assetsManagerPrefab);}
         if(FindObjectOfType<AudioManager>()==null){Instantiate(audioManagerPrefab);}
 
         //if(FindObjectOfType<DBAccess>()==null){Instantiate(dbaccessPrefab);}

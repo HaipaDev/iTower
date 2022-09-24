@@ -20,7 +20,7 @@ public class GSceneManager : MonoBehaviour{ public static GSceneManager instance
         //transition=FindObjectOfType<Tag_Transition>().GetComponent<ParticleSystem>();
         //transitioner=FindObjectOfType<Tag_Transition>().GetComponent<Animator>();
     }
-    public void LoadStartMenuLoader(){SceneManager.LoadScene("Menu");Instantiate(GameCreator.instance.GetJukeboxPrefab());}
+    public void LoadStartMenuLoader(){SceneManager.LoadScene("Menu");Instantiate(CoreSetup.instance.GetJukeboxPrefab());}
     public void LoadStartMenu(){
         SaveSerial.instance.Save();
         /*SaveSerial.instance.SaveLogin();
