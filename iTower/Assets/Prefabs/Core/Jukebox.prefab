@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8565809542268954524}
-  - component: {fileID: 2968954924697076994}
+  - component: {fileID: 7235555855787418343}
   - component: {fileID: 1194470432126890574}
   m_Layer: 0
   m_Name: Jukebox
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2968954924697076994
+--- !u!114 &7235555855787418343
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5024049173945341391}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55f0cf995efce604baab4ddff6dec45c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f10e97f3646e6e46abfcd397011ab29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pauseSpeed: 0.5
@@ -51,6 +51,7 @@ MonoBehaviour:
   lowerPitchLimit: 0.1
   upperPitchLimit: 2
   inverted: 0
+  currentMusic: {fileID: 0}
 --- !u!82 &1194470432126890574
 AudioSource:
   m_ObjectHideFlags: 0
@@ -60,8 +61,7 @@ AudioSource:
   m_GameObject: {fileID: 5024049173945341391}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -3489689421501240039, guid: cdf423136b4935c44a751cae8c8b0d94,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: -3489689421501240039, guid: cdf423136b4935c44a751cae8c8b0d94, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.4

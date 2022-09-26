@@ -36,7 +36,7 @@ public class CoreSetup : MonoBehaviour{   public static CoreSetup instance;
     }
     void Load(){
         LoadPre();
-        if(FindObjectOfType<GameSession>()==null){Instantiate(gameSessionPrefab);}
+        if(FindObjectOfType<GameManager>()==null){Instantiate(gameSessionPrefab);}
 
         if(FindObjectOfType<AssetsManager>()==null){Instantiate(assetsManagerPrefab);}
         if(FindObjectOfType<AudioManager>()==null){Instantiate(audioManagerPrefab);}

@@ -23,12 +23,12 @@ public class Jukebox : MonoBehaviour{   public static Jukebox instance;
         if(SceneManager.GetActiveScene().name=="Game"&&SaveSerial.instance.settingsData.windDownMusic){
             float _curMusicSpeed=GetComponent<AudioSource>().pitch;
             float _musicSpeed=1f;
-            if(GameSession.GlobalTimeIsPausedNotSlowed){_musicSpeed=pauseSpeed;}
-            if(!GameSession.GlobalTimeIsPausedNotSlowed/*&&GameSession.instance.speedChanged*/){_musicSpeed=1-(GameSession.instance.defaultGameSpeed-GameSession.instance.gameSpeed);}
-            if(!GameSession.GlobalTimeIsPausedNotSlowed&&Player.instance!=null){_musicSpeed=1-(GameSession.instance.defaultGameSpeed-GameSession.instance.gameSpeed);}
+            if(GameManager.GlobalTimeIsPausedNotSlowed){_musicSpeed=pauseSpeed;}
+            if(!GameManager.GlobalTimeIsPausedNotSlowed/*&&GameManager.instance.speedChanged*/){_musicSpeed=1-(GameManager.instance.defaultGameSpeed-GameManager.instance.gameSpeed);}
+            if(!GameManager.GlobalTimeIsPausedNotSlowed&&Player.instance!=null){_musicSpeed=1-(GameManager.instance.defaultGameSpeed-GameManager.instance.gameSpeed);}
             if(Player.instance==null){_musicSpeed=deadSpeed;inverted=false;}
 
-            if(!GameSession.GlobalTimeIsPausedNotSlowed){_musicSpeed=1f;}
+            if(!GameManager.GlobalTimeIsPausedNotSlowed){_musicSpeed=1f;}
             
             int _mult=1;if(inverted){_mult=-1;}else{_mult=1;}
             if(_curMusicSpeed>_musicSpeed*_mult)_curMusicSpeed=Mathf.Clamp(_curMusicSpeed-=windUpDownSpeed,_musicSpeed,upperPitchLimit)*_mult;

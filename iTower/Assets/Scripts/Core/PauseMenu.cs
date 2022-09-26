@@ -16,7 +16,7 @@ public class PauseMenu : MonoBehaviour{
         if(Input.GetKeyDown(KeyCode.Escape)){
             if(GameIsPaused){
                 if(pauseMenuUI.activeSelf)Resume();
-                if(optionsUI.transform.GetChild(0).gameObject.activeSelf){GameSession.instance.SaveSettings();GameSession.instance.CloseSettings(true);pauseMenuUI.SetActive(true);}
+                if(optionsUI.transform.GetChild(0).gameObject.activeSelf){GameManager.instance.SaveSettings();GameManager.instance.CloseSettings(true);pauseMenuUI.SetActive(true);}
                 if(optionsUI.transform.GetChild(1).gameObject.activeSelf){optionsUI.GetComponent<SettingsMenu>().OpenSettings();PauseEmpty();}
             }else{
                 Pause();
@@ -25,28 +25,28 @@ public class PauseMenu : MonoBehaviour{
     }
     public void Resume(){
         pauseMenuUI.SetActive(false);
-        if(optionsUI.transform.GetChild(0).gameObject.activeSelf){GameSession.instance.CloseSettings(false);}
+        if(optionsUI.transform.GetChild(0).gameObject.activeSelf){GameManager.instance.CloseSettings(false);}
         GameObject.Find("BlurImage").GetComponent<SpriteRenderer>().enabled=false;
-        GameSession.instance.gameSpeed=1;
+        GameManager.instance.gameSpeed=1;
         GameIsPaused=false;
     }
     public void PauseEmpty(){
         GameObject.Find("BlurImage").GetComponent<SpriteRenderer>().enabled=true;
         GameIsPaused=true;
-        GameSession.instance.gameSpeed=0;
+        GameManager.instance.gameSpeed=0;
     }
     public void Pause(){
-        prevGameSpeed = GameSession.instance.gameSpeed;
+        prevGameSpeed = GameManager.instance.gameSpeed;
         pauseMenuUI.SetActive(true);
         PauseEmpty();
     }
     public void Menu(){
-        GameSession.instance.gameSpeed = 1f;
+        GameManager.instance.gameSpeed = 1f;
         SceneManager.LoadScene("Menu");
     }
     public void OpenOptions(){
         optionsUI.GetComponent<SettingsMenu>().OpenSettings();
         pauseMenuUI.SetActive(false);
     }
-    public void PreviousGameSpeed(){GameSession.instance.gameSpeed = prevGameSpeed;}
+    public void PreviousGameSpeed(){GameManager.instance.gameSpeed = prevGameSpeed;}
 }

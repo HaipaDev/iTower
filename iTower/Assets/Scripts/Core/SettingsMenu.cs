@@ -27,7 +27,7 @@ public class SettingsMenu : MonoBehaviour{
             qualityDropdopwn.GetComponent<Dropdown>().value = SaveSerial.instance.settingsData.quality;
             fullscreenToggle.GetComponent<Toggle>().isOn = SaveSerial.instance.settingsData.fullscreen;
             pprocessingToggle.GetComponent<Toggle>().isOn = SaveSerial.instance.settingsData.pprocessing;
-            cheatToggle.GetComponent<Toggle>().isOn = GameSession.instance.cheatmode;
+            cheatToggle.GetComponent<Toggle>().isOn = GameManager.instance.cheatmode;
 
             masterSlider.GetComponent<Slider>().value = SaveSerial.instance.settingsData.masterVolume;
             soundSlider.GetComponent<Slider>().value = SaveSerial.instance.settingsData.soundVolume;
@@ -51,29 +51,29 @@ public class SettingsMenu : MonoBehaviour{
     public void OpenDeleteAll(){transform.GetChild(1).gameObject.SetActive(true);transform.GetChild(0).gameObject.SetActive(false);}
     public void Close(){transform.GetChild(0).gameObject.SetActive(false);transform.GetChild(1).gameObject.SetActive(false);}
     public void SetMasterVolume(float volume){
-    if(GameSession.instance!=null){
+    if(GameManager.instance!=null){
         if(SaveSerial.instance!=null)SaveSerial.instance.settingsData.masterVolume = volume;
     }}public void SetSoundVolume(float volume){
-    if(GameSession.instance!=null){
+    if(GameManager.instance!=null){
         if(SaveSerial.instance!=null)SaveSerial.instance.settingsData.soundVolume = volume;
     }}
     public void SetMusicVolume(float volume){
-    if(GameSession.instance!=null){
+    if(GameManager.instance!=null){
         if(SaveSerial.instance!=null)SaveSerial.instance.settingsData.musicVolume = volume;
     }}
     public void SetQuality(int qualityIndex){
-    if(GameSession.instance!=null){
+    if(GameManager.instance!=null){
         QualitySettings.SetQualityLevel(qualityIndex);
         if(SaveSerial.instance!=null)SaveSerial.instance.settingsData.quality = qualityIndex;
     }}
     public void SetFullscreen (bool isFullscreen){
-    if(GameSession.instance!=null){
+    if(GameManager.instance!=null){
         Screen.fullScreen = isFullscreen;
         if(SaveSerial.instance!=null)SaveSerial.instance.settingsData.fullscreen = isFullscreen;
         Screen.SetResolution(Display.main.systemWidth,Display.main.systemHeight,isFullscreen,60);
     }}
     public void SetPostProcessing (bool isPostprocessed){
-    if(GameSession.instance!=null){
+    if(GameManager.instance!=null){
         postProcessVolume=FindObjectOfType<PostProcessVolume>();
         if(SaveSerial.instance!=null)if(SaveSerial.instance!=null)SaveSerial.instance.settingsData.pprocessing = isPostprocessed;
         if(isPostprocessed==true && postProcessVolume==null){postProcessVolume=Instantiate(pprocessingPrefab,Camera.main.transform).GetComponent<PostProcessVolume>();}//FindObjectOfType<Level>().RestartScene();}
@@ -81,6 +81,6 @@ public class SettingsMenu : MonoBehaviour{
         if(isPostprocessed==false && FindObjectOfType<PostProcessVolume>()!=null){FindObjectOfType<PostProcessVolume>().enabled=false;}//Destroy(FindObjectOfType<PostProcessVolume>());}
     }}
     public void SetCheatmode(bool isCheatmode){
-        if(GameSession.instance!=null)GameSession.instance.cheatmode=isCheatmode;
+        if(GameManager.instance!=null)GameManager.instance.cheatmode=isCheatmode;
     }
 }

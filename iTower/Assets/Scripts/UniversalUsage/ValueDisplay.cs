@@ -11,8 +11,8 @@ public class ValueDisplay : MonoBehaviour{
     }
     void Update(){ChangeText();}
     void ChangeText(){
-        if(GameSession.instance!=null){
-            if(value=="gameVersion")txt.text=GameSession.instance.gameVersion;
+        if(GameManager.instance!=null){
+            if(value=="gameVersion")txt.text=GameManager.instance.gameVersion;
         }
     }
 }

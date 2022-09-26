@@ -2,26 +2,61 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
-public class Screenflash : MonoBehaviour{
+public class Screenflash : MonoBehaviour{   public static Screenflash instance;
+    [Header("Prefab etc")]
+    [AssetsOnly][SerializeField] GameObject screenflashImgPrefab;
+    [Header("Damage")]
+    [SerializeField] Sprite damageFlashSprite;
     [SerializeField] Color damageFlashColor;
     [SerializeField] float damageFlashSpeed;
+    [Header("Heal")]
+    [SerializeField] Sprite healFlashSprite;
     [SerializeField] Color healFlashColor;
-    [SerializeField] float healedFlashSpeed;
-    Player player;
-    Image image;
-    // Start is called before the first frame update
+    [SerializeField] float healFlashSpeed;
+    [Header("Shadow")]
+    [SerializeField] Sprite shadowFlashSprite;
+    [SerializeField] Color shadowFlashColor;
+    [SerializeField] float shadowFlashSpeed;
+    [Header("Flame")]
+    [SerializeField] Sprite flameFlashSprite;
+    [SerializeField] Color flameFlashColor;
+    [SerializeField] float flameFlashSpeed;
+    [Header("Electicify")]
+    [SerializeField] Sprite electrcFlashSprite;
+    [SerializeField] Color electrcFlashColor;
+    [SerializeField] float electrcFlashSpeed;
+    [Header("Freeze")]
+    [SerializeField] Sprite frozenFlashSprite;
+    [SerializeField] Color frozenFlashColor;
+    [SerializeField] float frozenFlashSpeed;
     void Start(){
-        player=FindObjectOfType<Player>();
-        image=GetComponent<Image>();
+        if(Screenflash.instance==null)instance=this;
     }
 
-    // Update is called once per frame
-    void Update(){
-    if(player!=null){
-        if(player.damaged==true){image.color=damageFlashColor;player.damaged=false;}
-        else{image.color=Color.Lerp(image.color, Color.clear, damageFlashSpeed*Time.deltaTime);}
-        if(player.healed==true){image.color=healFlashColor;player.healed=false;}
-        else{image.color=Color.Lerp(image.color, Color.clear, healedFlashSpeed*Time.deltaTime);}
-    }}
+    public void Damage(){
+        GameObject go=Instantiate(screenflashImgPrefab,transform);var simg=go.GetComponent<ScreenflashImg>();
+        simg.Setup(damageFlashSprite,damageFlashColor,damageFlashSpeed);
+    }
+    public void Heal(){
+        GameObject go=Instantiate(screenflashImgPrefab,transform);var simg=go.GetComponent<ScreenflashImg>();
+        simg.Setup(healFlashSprite,healFlashColor,healFlashSpeed);
+    }
+    public void Shadow(){
+        GameObject go=Instantiate(screenflashImgPrefab,transform);var simg=go.GetComponent<ScreenflashImg>();
+        simg.Setup(shadowFlashSprite,shadowFlashColor,shadowFlashSpeed);
+    }
+    public void Flame(){
+        GameObject go=Instantiate(screenflashImgPrefab,transform);var simg=go.GetComponent<ScreenflashImg>();
+        simg.Setup(flameFlashSprite,flameFlashColor,flameFlashSpeed);
+    }
+    public void Electrc(){
+        GameObject go=Instantiate(screenflashImgPrefab,transform);var simg=go.GetComponent<ScreenflashImg>();
+        simg.Setup(electrcFlashSprite,electrcFlashColor,electrcFlashSpeed);
+    }
+    public void Freeze(){
+        GameObject go=Instantiate(screenflashImgPrefab,transform);var simg=go.GetComponent<ScreenflashImg>();
+        simg.Setup(frozenFlashSprite,frozenFlashColor,frozenFlashSpeed);
+    }
 }

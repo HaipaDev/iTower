@@ -9,7 +9,7 @@ using UnityEngine.Rendering.PostProcessing;
 //using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
 
-public class GameSession : MonoBehaviour{   public static GameSession instance;
+public class GameManager : MonoBehaviour{   public static GameManager instance;
     public static bool GlobalTimeIsPaused;
     public static bool GlobalTimeIsPausedNotSlowed;
     [Header("Global")]
@@ -46,7 +46,7 @@ public class GameSession : MonoBehaviour{   public static GameSession instance;
         #endif
         gameObject.AddComponent<gitignoreScript>();
     }
-    void SetUpSingleton(){int numberOfObj=FindObjectsOfType<GameSession>().Length;if(numberOfObj>1){Destroy(gameObject);}else{DontDestroyOnLoad(gameObject);}}
+    void SetUpSingleton(){int numberOfObj=FindObjectsOfType<GameManager>().Length;if(numberOfObj>1){Destroy(gameObject);}else{DontDestroyOnLoad(gameObject);}}
     void Start(){}
     void Update(){
         if(gameSpeed>=0){Time.timeScale=gameSpeed;}if(gameSpeed<0){gameSpeed=0;}
@@ -69,7 +69,7 @@ public class GameSession : MonoBehaviour{   public static GameSession instance;
                 if(sound!=null){
                     GameObject snd=sound.gameObject;
                     //if(sound!=musicPlayer){
-                    if(snd.GetComponent<MusicPlayer>()==null){
+                    if(snd.GetComponent<Jukebox>()==null){
                         //sound.pitch=1;
                         sound.Stop();
                     }
@@ -97,10 +97,10 @@ public class GameSession : MonoBehaviour{   public static GameSession instance;
         GSceneManager.instance.ReloadScene();
         SaveSerial.instance.SaveSettings();
     }
-    public void ResetMusicPitch(){if(FindObjectOfType<MusicPlayer>()!=null)FindObjectOfType<MusicPlayer>().GetComponent<AudioSource>().pitch=1;}
+    public void ResetMusicPitch(){if(Jukebox.instance!=null)Jukebox.instance.GetComponent<AudioSource>().pitch=1;}
     float settingsOpenTimer;
     public void CloseSettings(bool goToPause){
-    if(GameSession.instance!=null){
+    if(GameManager.instance!=null){
         if(SceneManager.GetActiveScene().name=="Options"){GSceneManager.instance.LoadStartMenu();}
         else if(SceneManager.GetActiveScene().name=="Game"&&PauseMenu.GameIsPaused){if(FindObjectOfType<SettingsMenu>()!=null)FindObjectOfType<SettingsMenu>().Close();if(FindObjectOfType<PauseMenu>()!=null&&goToPause)FindObjectOfType<PauseMenu>().Pause();}
     }}
@@ -110,9 +110,9 @@ public class GameSession : MonoBehaviour{   public static GameSession instance;
         //int milliseconds = (int) (1000 * (time - minutes * 60 - seconds));
     return string.Format("{0:00}:{1:00}"/*:{2:000}"*/, minutes, seconds/*, milliseconds*/ );
     }
-    public string GetGameSessionTimeFormat(){
+    public string GetGameManagerTimeFormat(){
         return FormatTime(gameSessionTime);
-    }public int GetGameSessionTime(){
+    }public int GetGameManagerTime(){
         return Mathf.RoundToInt(gameSessionTime);
     }
     public void SetCheatmode(){if(!cheatmode){cheatmode=true;return;}else{cheatmode=false;return;}}

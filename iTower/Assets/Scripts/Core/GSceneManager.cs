@@ -13,7 +13,7 @@ public class GSceneManager : MonoBehaviour{ public static GSceneManager instance
     void Awake(){if(GSceneManager.instance!=null){Destroy(gameObject);}else{instance=this;DontDestroyOnLoad(gameObject);}}
     void Start(){
         //transition=FindObjectOfType<Tag_Transition>().GetComponent<ParticleSystem>();
-        //prevGameSpeed = GameSession.instance.gameSpeed;
+        //prevGameSpeed = GameManager.instance.gameSpeed;
     }
     void Update(){
         CheckESC();
@@ -29,45 +29,45 @@ public class GSceneManager : MonoBehaviour{ public static GSceneManager instance
             SaveSerial.instance.SaveStats();
         }*/
         SceneManager.LoadScene("Menu");
-        GameSession.instance.ResetMusicPitch();if(SceneManager.GetActiveScene().name=="Menu")GameSession.instance.speedChanged=false;GameSession.instance.gameSpeed=1f;
+        GameManager.instance.ResetMusicPitch();if(SceneManager.GetActiveScene().name=="Menu")GameManager.instance.speedChanged=false;GameManager.instance.gameSpeed=1f;
         Resources.UnloadUnusedAssets();
     }
     public void LoadStartMenuGame(){GSceneManager.instance.StartCoroutine(LoadStartMenuGameI());}
     IEnumerator LoadStartMenuGameI(){
         if(SceneManager.GetActiveScene().name=="Game"){
-            //GameSession.instance.SaveHighscore();
+            //GameManager.instance.SaveHighscore();
             yield return new WaitForSecondsRealtime(0.01f);
-            //GameSession.instance.ResetScore();
+            //GameManager.instance.ResetScore();
         }
         yield return new WaitForSecondsRealtime(0.05f);
         SaveSerial.instance.Save();
         //SaveSerial.instance.SaveLogin();
         //StatsAchievsManager.instance.SaveStats();
         //SaveSerial.instance.SaveStats();
-        GameSession.instance.ResetMusicPitch();
+        GameManager.instance.ResetMusicPitch();
         yield return new WaitForSecondsRealtime(0.01f);
-        GameSession.instance.speedChanged=false;GameSession.instance.defaultGameSpeed=1f;GameSession.instance.gameSpeed=1f;
+        GameManager.instance.speedChanged=false;GameManager.instance.defaultGameSpeed=1f;GameManager.instance.gameSpeed=1f;
         Resources.UnloadUnusedAssets();
-        /*GameSession.instance.SetGamemodeSelected(0);*/
+        /*GameManager.instance.SetGamemodeSelected(0);*/
     }
     public void RestartGame(){GSceneManager.instance.StartCoroutine(GSceneManager.instance.RestartGameI());}
     IEnumerator RestartGameI(){
-        //GameSession.instance.SaveHighscore();
-        //if(GameSession.instance.CheckGamemodeSelected("Adventure"))GameSession.instance.SaveAdventure();//not sure if Restart should save or not
+        //GameManager.instance.SaveHighscore();
+        //if(GameManager.instance.CheckGamemodeSelected("Adventure"))GameManager.instance.SaveAdventure();//not sure if Restart should save or not
         yield return new WaitForSecondsRealtime(0.01f);
         //spawnReqsMono.RestartAllValues();
         //spawnReqsMono.ResetSpawnReqsList();
-        //GameSession.instance.ResetScore();
-        GameSession.instance.ResetMusicPitch();
+        //GameManager.instance.ResetScore();
+        GameManager.instance.ResetMusicPitch();
         yield return new WaitForSecondsRealtime(0.05f);
         ReloadScene();
-        //GameSession.instance.EnterGameScene();
+        //GameManager.instance.EnterGameScene();
         //GameRules.instance.EnterGameScene();
     }
     public void LoadGameScene(){
-        SceneManager.LoadScene("Game");//GameSession.instance.ResetScore();
-        GameSession.instance.gameSpeed=1f;
-        //GameSession.instance.EnterGameScene();
+        SceneManager.LoadScene("Game");//GameManager.instance.ResetScore();
+        GameManager.instance.gameSpeed=1f;
+        //GameManager.instance.EnterGameScene();
         //GameRules.instance.EnterGameScene();
     }
     public void LoadOptionsScene(){SceneManager.LoadScene("Options");}
@@ -82,8 +82,8 @@ public class GSceneManager : MonoBehaviour{ public static GSceneManager instance
     public void LoadWebsite(string url){Application.OpenURL(url);}
     public void ReloadScene(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        GameSession.instance.speedChanged=false;
-        GameSession.instance.gameSpeed=1f;
+        GameManager.instance.speedChanged=false;
+        GameManager.instance.gameSpeed=1f;
     }
     public void QuitGame(){
         Application.Quit();
@@ -91,8 +91,8 @@ public class GSceneManager : MonoBehaviour{ public static GSceneManager instance
     public void RestartApp(){
         if(Jukebox.instance!=null)Destroy(Jukebox.instance.gameObject);
         SceneManager.LoadScene("Loading");
-        GameSession.instance.speedChanged=false;
-        GameSession.instance.gameSpeed=1f;
+        GameManager.instance.speedChanged=false;
+        GameManager.instance.gameSpeed=1f;
     }
     public static bool EscPressed(){return Input.GetKeyDown(KeyCode.Escape)||Input.GetKeyDown(KeyCode.Joystick1Button1);}
     void CheckESC(){    if(EscPressed()){
