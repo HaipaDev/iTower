@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 356534cc7b192a147bda220e70555391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameMangerPrefab: {fileID: 2670168737584117729, guid: 2519fb6cd6c8d32499f6509554ada2a2, type: 3}
+  gsceneManagerPrefab: {fileID: 7128682332300410602, guid: 2e55e7103b4ac1d498ecbb93a5c55c8d, type: 3}
   saveSerialPrefab: {fileID: 8669642154265912527, guid: c4c14bba175656442b67163c341cafd1, type: 3}
   easySavePrefab: {fileID: 178623250804366105, guid: 874878241dde5334991f56a4fe7f7142, type: 3}
-  gsceneManagerPrefab: {fileID: 7128682332300410602, guid: 2e55e7103b4ac1d498ecbb93a5c55c8d, type: 3}
-  gameSessionPrefab: {fileID: 2670168737584117729, guid: 2519fb6cd6c8d32499f6509554ada2a2, type: 3}
   assetsManagerPrefab: {fileID: 6877064455026536268, guid: 0e50c989ad4f27f4aada9cc3652d57c5, type: 3}
   audioManagerPrefab: {fileID: 2010752312624517974, guid: ede2de91e76422341943ea0e111f99f5, type: 3}
   jukeboxPrefab: {fileID: 5024049173945341391, guid: b292bc4520035e94c83eb76367d1740c, type: 3}

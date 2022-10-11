@@ -30,7 +30,8 @@ Transform:
   m_GameObject: {fileID: 2472915466929033032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.12, y: -3.66, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8634532959811884570}
   - {fileID: 1178732834807785791}
@@ -102,7 +103,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.017505467, y: -0.07257867}
+  m_Offset: {x: 0.01878737, y: -0.09649801}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -113,7 +114,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5330472, y: 0.8307347}
+  m_Size: {x: 0.66203976, y: 0.9622917}
   m_EdgeRadius: 0
 --- !u!50 &7386467585896616976
 Rigidbody2D:
@@ -148,31 +149,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d1a7113debf5db4ea196611c31b20d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedDef: 3
-  jumpFcDef: 5.75
-  jumpTimeDef: 0.15
-  defaultGravity: 2
-  groundFriction: 0.085
   feetPos: {fileID: 8634532959811884570}
   checkRadius: 0.45
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  speedDef: 2.5
+  speed: 0
+  jumpForceDef: 5.75
+  jumpForce: 0
+  jumpTimeDef: 0.15
+  jumpDelayDef: 0.44
+  jumpDelay: 0
+  defaultGravity: 2
+  groundFriction: 0.085
   accumulatedSpeed: 1
   accumulatedSpeedTimer: 0
-  speedC: 0
-  jumpFcC: 0
-  isGrounded: 0
-  jumpTimer: 0
-  isJumping: 0
   wallBounces: 0
   wallBounceTimer: 0
   wallBounceTimerStop: 0
+  isGrounded: 0
+  jumpTimer: 0
+  isJumping: 0
   damaged: 0
   healed: 0
 --- !u!95 &161790889918629518
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -185,6 +188,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -215,6 +219,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6099921895523752195}
   m_RootOrder: 0
@@ -246,6 +251,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6099921895523752195}
   m_RootOrder: 1

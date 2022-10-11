@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
+using Sirenix.OdinInspector;
 
 public class PlatformSpawner : MonoBehaviour{
     [SerializeField]GameObject platformPrefab;
@@ -10,6 +11,7 @@ public class PlatformSpawner : MonoBehaviour{
     public Vector2 spawnDistances=new Vector2(1f,2f);//X is min, Y is max
     public Vector2 spawnX=new Vector2(-3f,3f);//X is left max, Y is right max
     public bool spawnBasedOnLastPos=true;
+    [EnableIf("spawnBasedOnLastPos")]public float spawnBasedOnLastPosChance=70f;
     public Vector2 spawnXnext=new Vector2(-1.5f,1.5f);//X is left max, Y is right max
     public Vector2 sizes=new Vector2(1f,3f);//X is min, Y is max
     public float fallSpeed=1.4f;
@@ -19,7 +21,7 @@ public class PlatformSpawner : MonoBehaviour{
     public float speedTime=0.5f;
     [SerializeField]float speedTimer=-4;
     [SerializeField]float fallSpeedC;
-    Vector2 lastPlatformPos;
+    Vector2 lastPlatformPos=Vector2.zero;
     void Start(){
         //Spawn first static plaforms
         float yy=-4.6f;//First platform Y
@@ -54,14 +56,15 @@ public class PlatformSpawner : MonoBehaviour{
     }
     void SpawnPlatform(float yy){
         var posX=0f;
-        while(posX>3.5f||posX<-3.5f){
-            if(lastPlatformPos==Vector2.zero||!spawnBasedOnLastPos){posX=Random.Range(spawnX.x,spawnX.y);}
-            else{if(spawnBasedOnLastPos)posX=lastPlatformPos.x+Random.Range(spawnXnext.x,spawnXnext.y);}
+        var _doSpawnBasedOnLast=AssetsManager.CheckChance(spawnBasedOnLastPosChance);
+        while(posX>3.5f||posX<-3.5f||posX==0f){
+            if((lastPlatformPos==Vector2.zero||(spawnBasedOnLastPos&&_doSpawnBasedOnLast))||!spawnBasedOnLastPos){posX=(float)System.Math.Round(Random.Range(spawnX.x,spawnX.y),2);}
+            else{if(spawnBasedOnLastPos)posX=lastPlatformPos.x+(float)System.Math.Round(Random.Range(spawnXnext.x,spawnXnext.y),2);}
         }
         var pos=new Vector2(posX,yy);
         lastPlatformPos=pos;
         GameObject go=Instantiate(platformPrefab,pos,Quaternion.identity);//Spawn platform
-        SetPlatformScale(go,Random.Range(sizes.x,sizes.y));//Set size
+        SetPlatformScale(go,(float)System.Math.Round(Random.Range(sizes.x,sizes.y),2));//Set size
         highestPlatform=go;//On each spawn set the highest platform
         platformCount++;
         go.GetComponent<Platform>().ID=platformCount;

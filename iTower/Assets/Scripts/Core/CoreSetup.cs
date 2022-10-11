@@ -7,13 +7,13 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 
 public class CoreSetup : MonoBehaviour{   public static CoreSetup instance;
-    [Header("Main managers")]
+    [Header("Main Managers")]
+    [AssetsOnly][SerializeField] GameObject gameMangerPrefab;
+    [AssetsOnly][SerializeField] GameObject gsceneManagerPrefab;
     [AssetsOnly][SerializeField] GameObject saveSerialPrefab;
     [AssetsOnly][SerializeField] GameObject easySavePrefab;
-    [AssetsOnly][SerializeField] GameObject gsceneManagerPrefab;
-    [AssetsOnly][SerializeField] GameObject gameSessionPrefab;
     
-    [Header("Assets managers")]
+    [Header("Assets Managers")]
     [AssetsOnly][SerializeField] GameObject assetsManagerPrefab;
     [AssetsOnly][SerializeField] GameObject audioManagerPrefab;
     [AssetsOnly][SerializeField] GameObject jukeboxPrefab;
@@ -36,7 +36,7 @@ public class CoreSetup : MonoBehaviour{   public static CoreSetup instance;
     }
     void Load(){
         LoadPre();
-        if(FindObjectOfType<GameManager>()==null){Instantiate(gameSessionPrefab);}
+        if(FindObjectOfType<GameManager>()==null){Instantiate(gameMangerPrefab);}
 
         if(FindObjectOfType<AssetsManager>()==null){Instantiate(assetsManagerPrefab);}
         if(FindObjectOfType<AudioManager>()==null){Instantiate(audioManagerPrefab);}
@@ -45,7 +45,7 @@ public class CoreSetup : MonoBehaviour{   public static CoreSetup instance;
         //if(FindObjectOfType<DiscordPresence.PresenceManager>()==null){Instantiate(discordPresencePrefab);}
         //if(FindObjectOfType<StatsAchievsManager>()==null){Instantiate(statsAchievsManagerPrefab);}
         
-        if(FindObjectOfType<PostProcessVolume>()!=null&& FindObjectOfType<SaveSerial>().settingsData.pprocessing!=true){FindObjectOfType<PostProcessVolume>().enabled=false;}//Destroy(FindObjectOfType<PostProcessVolume>());}
+        if(FindObjectOfType<PostProcessVolume>()!=null&&FindObjectOfType<SaveSerial>().settingsData.pprocessing!=true){FindObjectOfType<PostProcessVolume>().enabled=false;}//Destroy(FindObjectOfType<PostProcessVolume>());}
         //if(FindObjectOfType<EventSystem>()!=null){if(FindObjectOfType<EventSystem>().GetComponent<UIInputSystem>()==null)FindObjectOfType<EventSystem>().gameObject.AddComponent<UIInputSystem>();}
         if(FindObjectOfType<Jukebox>()==null&&SceneManager.GetActiveScene().name=="Menu"){Instantiate(jukeboxPrefab);}
         //yield return new WaitForSeconds(0.5f);

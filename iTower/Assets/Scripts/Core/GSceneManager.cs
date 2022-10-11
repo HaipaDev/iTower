@@ -17,6 +17,7 @@ public class GSceneManager : MonoBehaviour{ public static GSceneManager instance
     }
     void Update(){
         CheckESC();
+        if(SceneManager.GetActiveScene().name=="Game"&&Input.GetKeyDown(KeyCode.R)){ReloadScene();}
         //transition=FindObjectOfType<Tag_Transition>().GetComponent<ParticleSystem>();
         //transitioner=FindObjectOfType<Tag_Transition>().GetComponent<Animator>();
     }
